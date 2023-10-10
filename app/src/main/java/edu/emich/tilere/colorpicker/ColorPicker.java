@@ -2,9 +2,11 @@ package edu.emich.tilere.colorpicker;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.drawable.shapes.Shape;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -27,14 +29,13 @@ public class ColorPicker extends View {
     // Canvas used for drawing components to the screen
     private Canvas m_canvas;
 
-    // X position of the color picker
-    private double pickerX = 0.0;
+    // Whether to draw the bitmap in m_bitmap
+    private boolean toDrawBitmap = false;
 
-    // Y position of the color picker
-    private double pickerY = 0.0;
+    // Bitmap to be drawn
+    private Bitmap m_bitmap;
 
-    // Whether or not to show the color picker
-    private boolean isPickerVisible = false;
+    private final Rect m_bitmapContainer = new Rect();
 
     public ColorPicker(Context context, AttributeSet set) {
         super(context, set);
@@ -56,8 +57,22 @@ public class ColorPicker extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.drawPaint(m_drawPaint);
+        m_bitmapContainer.left = 0;
+        m_bitmapContainer.top = 0;
+        m_bitmapContainer.right = this.getWidth();
+        m_bitmapContainer.bottom = this.getHeight();
+
+        if (toDrawBitmap) {
+            m_canvas.drawBitmap(m_bitmap, m_bitmapContainer, (Rect) null, null);
+        }
         this.m_canvas = canvas;
+    }
+
+    public void setImage(Bitmap image) {
+        toDrawBitmap = true;
+        m_bitmap = image;
+
+        invalidate();
     }
 
     @SuppressLint("ClickableViewAccessibility")

@@ -1,12 +1,17 @@
 package edu.emich.tilere;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,10 +21,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startImportImageIntent(View sender) {
-        Intent imageImportIntent = new Intent();
-        imageImportIntent.setType("image/*");
-        imageImportIntent.setAction(Intent.ACTION_GET_CONTENT);
+        Intent pickImageIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        pickImageIntent.setType("image/*");
 
-        startActivity(imageImportIntent);
+        var startForResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            // Handle activity result
+            var data = result.getData();
+            if (data != null) {
+                Uri imageUri = data.getData();
+            }
+        });
+
+        startForResult.launch(pickImageIntent);
     }
 }
