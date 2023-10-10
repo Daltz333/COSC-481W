@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.shapes.Shape;
+import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,8 +36,8 @@ public class ColorPicker extends View {
     // Whether or not to show the color picker
     private boolean isPickerVisible = false;
 
-    public ColorPicker(Context context) {
-        super(context);
+    public ColorPicker(Context context, AttributeSet set) {
+        super(context, set);
 
         setupPaint();
     }
@@ -55,9 +56,8 @@ public class ColorPicker extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        canvas.drawPaint(m_drawPaint);
         this.m_canvas = canvas;
-
-
     }
 
     @SuppressLint("ClickableViewAccessibility")
