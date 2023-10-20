@@ -7,11 +7,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.graphics.drawable.shapes.Shape;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -37,6 +35,11 @@ public class ColorPicker extends View {
 
     private final Rect m_bitmapContainer = new Rect();
 
+    public ColorPicker(Context context) {
+        super (context);
+
+        setupPaint();
+    }
     public ColorPicker(Context context, AttributeSet set) {
         super(context, set);
 
@@ -74,10 +77,5 @@ public class ColorPicker extends View {
 
         invalidate();
     }
-
-    @SuppressLint("ClickableViewAccessibility")
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        return super.onTouchEvent(event);
-    }
+    
 }
