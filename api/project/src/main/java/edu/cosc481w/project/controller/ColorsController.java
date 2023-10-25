@@ -15,12 +15,18 @@ import edu.cosc481w.project.service.ColorsService;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping("application/colors")
+@RequestMapping("/application/colors")
 @Slf4j
 public class ColorsController {
    
    @Autowired
    private ColorsService colorsService;
+
+   @GetMapping("/hello")
+   public String welcome() {
+      return "Hello";
+   }
+
 
    @GetMapping("/")
    public ResponseEntity<List<ColorsDto>> getAll() {
