@@ -1,0 +1,15 @@
+server:
+   port: 8900
+
+spring:
+   main:
+      allow-bean-definition-overriding: true
+      application:
+         name: color-service
+      datasource:
+         url:
+         driverClassName:
+         username:
+         password:
+      jpa:
+         show-sql: true
