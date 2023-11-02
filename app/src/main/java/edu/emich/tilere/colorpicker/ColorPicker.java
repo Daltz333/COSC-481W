@@ -59,16 +59,46 @@ public class ColorPicker extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-        m_bitmapContainer.left = 0;
-        m_bitmapContainer.top = 0;
-        m_bitmapContainer.right = this.getWidth();
-        m_bitmapContainer.bottom = this.getHeight();
+        // Just in case, let's size check
+        if (this.getWidth() != 0 || this.getHeight() != 0) {
 
-        if (toDrawBitmap) {
-            m_canvas.drawBitmap(m_bitmap, m_bitmapContainer, (Rect) null, null);
+            if (toDrawBitmap) {
+                processBitmap(canvas);
+            }
         }
+
         this.m_canvas = canvas;
+        super.onDraw(canvas);
+    }
+
+    /**
+     * Processes the bitmap currently specified
+     * @param canvas Canvas to draw bitmap onto
+     */
+    private void processBitmap(Canvas canvas) {
+        double bitmapRatio = (double)m_bitmap.getWidth() / (double)m_bitmap.getHeight();
+        int calculatedOutputHeight = 0;
+        int calculatedOutputWidth = 0;
+
+        // Resize to fill
+        calculatedOutputWidth = this.getWidth();
+        calculatedOutputHeight = (int)(calculatedOutputWidth / bitmapRatio);
+
+        // Image is too tall, resize to max height instead
+        if (calculatedOutputHeight > this.getHeight()) {
+            calculatedOutputHeight = this.getHeight();
+            calculatedOutputWidth = (int)(m_bitmap.getWidth() * bitmapRatio);
+        }
+
+        // Only recreate bitmap if necessary
+        // This avoids an expensive allocation
+        if (calculatedOutputHeight != m_bitmap.getHeight() || calculatedOutputWidth != m_bitmap.getWidth()) {
+            m_bitmap = Bitmap.createScaledBitmap(m_bitmap, calculatedOutputWidth, calculatedOutputHeight, false);
+        }
+
+        m_bitmapContainer.set(0, 0, calculatedOutputWidth, calculatedOutputHeight);
+        canvas.drawBitmap(m_bitmap, null, m_bitmapContainer, null);
+
     }
 
     public void setImage(Bitmap image) {
