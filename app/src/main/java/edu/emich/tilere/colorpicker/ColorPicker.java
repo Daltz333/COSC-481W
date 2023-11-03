@@ -37,7 +37,7 @@ public class ColorPicker extends View {
 
     public ColorPicker(Context context) {
         super (context);
-
+        
         setupPaint();
     }
     public ColorPicker(Context context, AttributeSet set) {
