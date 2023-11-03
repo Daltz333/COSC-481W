@@ -28,9 +28,6 @@ import java.util.Queue;
  * coordinates of their finger.
  */
 public class ColorPicker extends View {
-    // Canvas used for drawing components to the screen
-    private Canvas m_canvas;
-
     // Whether to draw the bitmap in m_bitmap
     private boolean toDrawBitmap = false;
 
@@ -39,12 +36,21 @@ public class ColorPicker extends View {
     private double m_lastXPos = 0.0;
     private double m_lastYPos = 0.0;
 
+    private final int m_crosshairWidth = 50;
+    private final int m_crosshairLineThickness = 10;
+
     private final TextPaint m_xPosPaint = new TextPaint();
     private final TextPaint m_yPosPaint = new TextPaint();
 
+    private final Paint m_crossHairPaint = new Paint();
+    private final Paint m_topLinePaint = new Paint();
+    private final Paint m_leftLinePaint = new Paint();
+    private final Paint m_rightLinePaint = new Paint();
+    private final Paint m_bottomLinePaint = new Paint();
+
     private final Rect m_bitmapContainer = new Rect();
 
-    private PriorityQueue<PaintItem> Paints = new PriorityQueue<>();
+    private final Canvas m_canvasBuffer = new Canvas();
 
     public ColorPicker(Context context) {
         super (context);
@@ -71,10 +77,12 @@ public class ColorPicker extends View {
     protected void onDraw(Canvas canvas) {
         // Just in case, let's size check
         if (this.getWidth() != 0 || this.getHeight() != 0) {
+            // DRAW BITMAP
             if (toDrawBitmap) {
                 processBitmap(canvas);
             }
 
+            // DRAW DEBUG TEXT
             m_xPosPaint.setAntiAlias(true);
             m_xPosPaint.setTextSize(16 * getResources().getDisplayMetrics().density);
             m_xPosPaint.setColor(0xFF000000);
@@ -99,9 +107,25 @@ public class ColorPicker extends View {
             StaticLayout yBuilder = builder.build();
             yBuilder.draw(canvas);
 
+            // DRAW SQUARE CROSSHAIRS
+            m_crossHairPaint.setColor(Color.RED);
+            m_crossHairPaint.setStrokeWidth(10);
+            m_crossHairPaint.setStyle(Paint.Style.STROKE);
+            canvas.drawRect((int)m_lastXPos, (int)m_lastYPos, (int)m_lastXPos + m_crosshairWidth, (int)m_lastYPos + m_crosshairWidth, m_crossHairPaint);
+
+            // DRAW TOP LINE
+            m_topLinePaint.setColor(Color.RED);
+            m_topLinePaint.setStrokeWidth(m_crosshairLineThickness);
+            canvas.drawLine((int)(m_lastXPos + (m_crosshairWidth / 2.0)), 0, (int)(m_lastXPos + (m_crosshairWidth / 2.0)), (int)m_lastYPos, m_topLinePaint);
+
+            // DRAW TOP LINE
+            m_leftLinePaint.setColor(Color.RED);
+            m_leftLinePaint.setStrokeWidth(m_crosshairLineThickness);
+            canvas.drawLine(0, (int)(m_lastYPos + (m_crosshairWidth / 2.0)), (int)m_lastXPos, (int)(m_lastYPos + (m_crosshairWidth / 2.0)), m_leftLinePaint);
+
+
         }
 
-        this.m_canvas = canvas;
         super.onDraw(canvas);
     }
 
@@ -117,10 +141,14 @@ public class ColorPicker extends View {
 
         if (x < 0) {
             x = 0;
+        } else if (x > getWidth()) {
+            x = getWidth();
         }
 
         if (y < 0) {
             y = 0;
+        } else if (y > getHeight()) {
+            y = getHeight();
         }
 
         m_lastXPos = x;
