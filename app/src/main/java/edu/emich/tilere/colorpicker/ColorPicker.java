@@ -56,7 +56,7 @@ public class ColorPicker extends View {
     private final Rect m_bitmapContainer = new Rect();
 
     // Magic number because the y coordinate is offset from the top by
-    private final int kMagicOffset = 100;
+    private final int kMagicOffset = 125;
 
     // This is the bitmap that all objects are drawn upon
     private Bitmap m_globalBitmap;
@@ -228,7 +228,7 @@ public class ColorPicker extends View {
             m_bitmap = Bitmap.createScaledBitmap(m_bitmap, calculatedOutputWidth, calculatedOutputHeight, false);
         }
 
-        m_bitmapContainer.set(0, 0, calculatedOutputWidth, calculatedOutputHeight);
+        m_bitmapContainer.set(0, 0+kMagicOffset, calculatedOutputWidth, calculatedOutputHeight+kMagicOffset);
         canvas.drawBitmap(m_bitmap, null, m_bitmapContainer, null);
 
     }
