@@ -19,9 +19,13 @@ import lombok.extern.slf4j.Slf4j;
 @Transactional
 @Slf4j
 public class ColorsService {
-   
-   @Autowired
+
    private ColorsRepository colorsRepository;
+
+   @Autowired
+   public ColorsService(ColorsRepository colorsRepository) {
+      this.colorsRepository = colorsRepository;
+   }
 
    public List<ColorsDto> getAll() {
       List<ColorsDto> listColors = colorsRepository.findAll()
@@ -31,7 +35,7 @@ public class ColorsService {
          log.error("No Colors Available");
 
       return listColors;
-   }  
+   }
 
    // public Colors getByColorName(String name) {
    //    return colorsRepository.findByColorName(name).orElseThrow(NoSuchElementException::new);
