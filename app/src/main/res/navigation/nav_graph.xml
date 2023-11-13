@@ -13,10 +13,40 @@
         <action
             android:id="@+id/action_introFragment_to_colorPickerFragment"
             app:destination="@id/colorPickerFragment" />
+        <action
+            android:id="@+id/action_introFragment_to_takePictureFragment"
+            app:destination="@id/takePictureFragment" />
     </fragment>
     <fragment
         android:id="@+id/colorPickerFragment"
         android:name="edu.emich.tilere.ColorPickerFragment"
         android:label="fragment_color_picker"
-        tools:layout="@layout/fragment_color_picker" />
+        tools:layout="@layout/fragment_color_picker" >
+        <action
+            android:id="@+id/action_colorPickerFragment_to_resultsFragment"
+            app:destination="@id/resultsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/filterFragment"
+        android:name="edu.emich.tilere.FilterFragment"
+        android:label="fragment_filters"
+        tools:layout="@layout/fragment_filters" />
+    <fragment
+        android:id="@+id/resultsFragment"
+        android:name="edu.emich.tilere.ResultsFragment"
+        android:label="fragment_results"
+        tools:layout="@layout/fragment_results" >
+        <action
+            android:id="@+id/action_resultsFragment_to_filterFragment"
+            app:destination="@id/filterFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/takePictureFragment"
+        android:name="edu.emich.tilere.TakePictureFragment"
+        android:label="fragment_take_picure"
+        tools:layout="@layout/fragment_take_picure" >
+        <action
+            android:id="@+id/action_takePictureFragment_to_resultsFragment"
+            app:destination="@id/resultsFragment" />
+    </fragment>
 </navigation>

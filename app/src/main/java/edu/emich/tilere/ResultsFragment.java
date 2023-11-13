@@ -1,21 +1,18 @@
 package edu.emich.tilere;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+
+import androidx.fragment.app.Fragment;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link IntroFragment#newInstance} factory method to
+ * Use the {@link ResultsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class IntroFragment extends Fragment {
+public class ResultsFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +23,7 @@ public class IntroFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public IntroFragment() {
+    public ResultsFragment() {
         // Required empty public constructor
     }
 
@@ -36,11 +33,11 @@ public class IntroFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment IntroFragment.
+     * @return A new instance of fragment ColorPickerFragment.
      */
-    // TODO: Rename and change types and number of parameters
-    public static IntroFragment newInstance(String param1, String param2) {
-        IntroFragment fragment = new IntroFragment();
+
+    public static ResultsFragment newInstance(String param1, String param2) {
+        ResultsFragment fragment = new ResultsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,18 +58,6 @@ public class IntroFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_intro, container, false);
-        try {
-            Button inport_button = (Button) view.findViewById(R.id.importView);
-            Button take_picture = (Button) view.findViewById(R.id.takePictueView);
-
-            take_picture.setOnClickListener(args -> {
-                NavHostFragment.findNavController(this).navigate(R.id.takePictureFragment);
-            });
-            inport_button.setOnClickListener(args -> {
-                NavHostFragment.findNavController(this).navigate(R.id.colorPickerFragment);
-            });
-        } catch (Exception ignored) {}
-        return view;
+        return inflater.inflate(R.layout.fragment_results, container, false);
     }
 }

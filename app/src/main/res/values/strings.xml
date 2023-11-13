@@ -2,4 +2,9 @@
     <string name="app_name">TileRE</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="filter_title">Filters</string>
+    <string name="results_title">Results</string>
+    <string name="take_picture_title">Take Picture</string>
+    <string name="import_button">Import Image</string>
+    <string name="take_picture_button">Take Picture</string>
 </resources>
