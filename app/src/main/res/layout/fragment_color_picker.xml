@@ -7,16 +7,18 @@
     tools:context=".ColorPickerFragment">
 
     <Button
-        android:id="@+id/importImageButton"
+        android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:background="#223CCA"
+        android:background="#071043"
         android:backgroundTint="#5DBEEA"
+        android:backgroundTintMode="add"
+        android:hapticFeedbackEnabled="true"
         android:onClick="startImportImageIntent"
         android:text="@string/import_image"
-        android:textColorHighlight="#2196F3"
-        android:textColorLink="#29BFD3"
+        android:textColorHighlight="#59F321"
+        android:textColorLink="#A0D329"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,7 +54,6 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
         android:background="@drawable/colorpicker_border"
@@ -61,7 +62,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/importImageButton"
+        app:layout_constraintTop_toBottomOf="@+id/button2"
         app:layout_constraintVertical_bias="0.0">
 
     </androidx.constraintlayout.widget.ConstraintLayout>
