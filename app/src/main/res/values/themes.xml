@@ -4,7 +4,6 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
 
-        <color name="blue">#102ABC</color>
 
     </style>
 
