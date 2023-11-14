@@ -2,4 +2,7 @@
     <string name="app_name">TileRE</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="import_image">Import Image</string>
+    <string name="getting_started">Getting Started</string>
+    <string name="import_or_take_a_picture_using_the_below_buttons_a_preview_of_your_image_will_be_shown_below_please_click_on_the_portion_of_the_image_that_contains_grout">Import or take a picture using the below buttons. A preview of your image will be shown below. Please click on the portion of the image that contains grout.</string>
 </resources>

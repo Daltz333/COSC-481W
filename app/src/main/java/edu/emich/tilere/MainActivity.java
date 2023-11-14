@@ -70,4 +70,5 @@ public class MainActivity extends AppCompatActivity {
     public void startImportImageIntent(View sender) {
         mPickImageLauncher.launch(mPickImageIntent);
     }
+
 }
