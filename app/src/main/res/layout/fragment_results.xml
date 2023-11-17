@@ -12,7 +12,7 @@
         tools:context=".MainActivity">
 
         <Button
-            android:id="@+id/save_button"
+            android:id="@+id/importColorPickerImageButton"
             android:layout_width="199dp"
             android:layout_height="64dp"
             android:layout_marginBottom="36dp"
@@ -29,7 +29,7 @@
             android:layout_marginBottom="28dp"
             android:text="Settings"
             android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/save_button"
+            app:layout_constraintBottom_toTopOf="@+id/importColorPickerImageButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 

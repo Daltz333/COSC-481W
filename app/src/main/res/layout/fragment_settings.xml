@@ -12,7 +12,7 @@
         tools:context=".MainActivity">
 
         <Button
-            android:id="@+id/save_button"
+            android:id="@+id/importColorPickerImageButton"
             android:layout_width="199dp"
             android:layout_height="64dp"
             android:layout_marginBottom="36dp"

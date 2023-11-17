@@ -1,14 +1,25 @@
 package edu.emich.tilere;
 
+import android.app.AlertDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import java.io.IOException;
+
+import edu.emich.tilere.colorpicker.ColorPicker;
+import edu.emich.tilere.utils.ImageUtils;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +27,10 @@ import android.widget.Button;
  * create an instance of this fragment.
  */
 public class ColorPickerFragment extends Fragment {
+
+    private Intent mPickImageIntent;
+    private ActivityResultLauncher<Intent> mPickImageLauncher;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -68,6 +83,53 @@ public class ColorPickerFragment extends Fragment {
                 NavHostFragment.findNavController(this).navigate(R.id.startPage);
             });
         } catch (Exception ignored) {}
+
+        Button importColorPicker = (Button)view.findViewById(R.id.importColorPickerImageButton);
+        importColorPicker.setOnClickListener(this::startImportImageIntent);
+
+        setupIntents(view);
         return view;
+    }
+
+    private void setupIntents(View view) {
+        mPickImageIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        mPickImageIntent.setType("image/*");
+
+        mPickImageLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            // Handle activity result
+            var data = result.getData();
+            if (data != null) {
+                Uri imageUri = data.getData();
+
+                ColorPicker colorPicker = (ColorPicker)view.findViewById(R.id.colorPicker);
+
+                // handle event colorpicker is null
+                // this should only ever happen if developer is bad
+                if (colorPicker == null) {
+                    new AlertDialog.Builder(getContext())
+                            .setTitle("Failed to retrieve color picker instance")
+                            .setMessage("ColorPicker instance or view was null. Please contact the application developers.")
+                            .show();
+
+                    return;
+                }
+
+                try {
+                    colorPicker.setImage(ImageUtils.getBitmapFromUri(view.getContext(), imageUri));
+                } catch (IOException ex) {
+                    String err = "Failed to import image from gallery with exception: " + ex.getMessage();
+                    Log.i(this.getClass().getName(), err);
+
+                    new AlertDialog.Builder(getContext())
+                            .setTitle("An error has occurred")
+                            .setMessage(err)
+                            .show();
+                }
+            }
+        });
+    }
+
+    public void startImportImageIntent(View sender) {
+        mPickImageLauncher.launch(mPickImageIntent);
     }
 }

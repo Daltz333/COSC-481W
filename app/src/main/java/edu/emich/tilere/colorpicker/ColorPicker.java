@@ -219,7 +219,7 @@ public class ColorPicker extends View {
         // Image is too tall, resize to max height instead
         if (calculatedOutputHeight > this.getHeight()) {
             calculatedOutputHeight = this.getHeight();
-            calculatedOutputWidth = (int)(m_bitmap.getWidth() * bitmapRatio);
+            calculatedOutputWidth = (int)(calculatedOutputHeight * bitmapRatio);
         }
 
         // Only recreate bitmap if necessary
