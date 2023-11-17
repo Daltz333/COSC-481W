@@ -42,6 +42,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
+        android:background="#ECEFE9"
         android:text="@string/import_or_take_a_picture_using_the_below_buttons_a_preview_of_your_image_will_be_shown_below_please_click_on_the_portion_of_the_image_that_contains_grout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
