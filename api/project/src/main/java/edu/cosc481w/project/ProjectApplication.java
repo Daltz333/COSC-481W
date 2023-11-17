@@ -3,7 +3,7 @@ package edu.cosc481w.project;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication(scanBasePackages = {"controller","service","model", "repository", "resources"})
+@SpringBootApplication()
 public class ProjectApplication {
 
 	public static void main(String[] args) {
