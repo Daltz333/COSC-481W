@@ -11,18 +11,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:background="#071043"
-        android:backgroundTint="#5DBEEA"
+        android:background="#DA291C"
+        android:backgroundTint="#C10A48"
         android:backgroundTintMode="add"
         android:hapticFeedbackEnabled="true"
         android:onClick="startImportImageIntent"
         android:text="@string/import_image"
+        android:textColor="#E0E0E0"
         android:textColorHighlight="#59F321"
         android:textColorLink="#A0D329"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/instructionsDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/instructionsDescription"
+        tools:ignore="TextContrastCheck" />
 
     <TextView
         android:id="@+id/gettingStarted"
