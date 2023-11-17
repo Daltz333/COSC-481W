@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#3045BC"
-            android:backgroundTint="#4C0505"
+            android:backgroundTint="#53D558"
             android:text="@string/next"
             android:textColorHighlight="#68AE18"
             android:textColorHint="#8BC34A"
