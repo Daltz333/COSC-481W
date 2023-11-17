@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".About">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="389dp"
+            android:layout_height="77dp"
+            android:layout_marginTop="8dp"
+            android:text="About"
+            android:textAlignment="center"
+            android:textSize="48sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.042"
+            tools:fontFamily="@font/archivo_black" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="376dp"
+            android:layout_height="502dp"
+            android:layout_marginTop="20dp"
+            android:text="Welcome to the THP Grout Recognition program.\n\nThis program was designed in order to recognize grout colors by name to supply the repairer with the closest grout color possible for the repair.\n\nIn this app, you can choose which brands you want to use for the repair. After taking or importing a picture, a program will find a best match for you."
+            android:textSize="28sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        <Button
+            android:id="@+id/menu_button"
+            android:layout_width="199dp"
+            android:layout_height="64dp"
+            android:layout_marginBottom="16dp"
+            android:text="Menu"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
