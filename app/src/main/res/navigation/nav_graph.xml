@@ -3,20 +3,45 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/introFragment">
+    app:startDestination="@id/startPage">
 
-    <fragment
-        android:id="@+id/introFragment"
-        android:name="edu.emich.tilere.IntroFragment"
-        android:label="fragment_intro"
-        tools:layout="@layout/fragment_intro" >
-        <action
-            android:id="@+id/action_introFragment_to_colorPickerFragment"
-            app:destination="@id/colorPickerFragment" />
-    </fragment>
     <fragment
         android:id="@+id/colorPickerFragment"
         android:name="edu.emich.tilere.ColorPickerFragment"
         android:label="fragment_color_picker"
-        tools:layout="@layout/fragment_color_picker" />
+        tools:layout="@layout/fragment_color_picker" >
+        <action
+            android:id="@+id/action_colorPickerFragment_to_results"
+            app:destination="@id/results" />
+    </fragment>
+    <fragment
+        android:id="@+id/startPage"
+        android:name="edu.emich.tilere.StartPage"
+        android:label="fragment_start_page"
+        tools:layout="@layout/fragment_start_page" >
+        <action
+            android:id="@+id/action_startPage_to_colorPickerFragment"
+            app:destination="@id/colorPickerFragment" />
+        <action
+            android:id="@+id/action_startPage_to_about"
+            app:destination="@id/about" />
+        <action
+            android:id="@+id/action_startPage_to_settings"
+            app:destination="@id/settings" />
+    </fragment>
+    <fragment
+        android:id="@+id/about"
+        android:name="edu.emich.tilere.About"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/settings"
+        android:name="edu.emich.tilere.Settings"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/results"
+        android:name="edu.emich.tilere.Results"
+        android:label="fragment_results"
+        tools:layout="@layout/fragment_results" />
 </navigation>

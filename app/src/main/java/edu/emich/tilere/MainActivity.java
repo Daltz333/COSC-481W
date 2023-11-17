@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             var data = result.getData();
             if (data != null) {
                 Uri imageUri = data.getData();
-                ColorPicker colorPicker = (ColorPicker)findViewById(R.id.colorPicker);
+                ColorPicker colorPicker = (ColorPicker)findViewById(R.id.colorPickerFragment);
 
                 // handle event colorpicker is null
                 // this should only ever happen if developer is bad
@@ -70,4 +70,5 @@ public class MainActivity extends AppCompatActivity {
     public void startImportImageIntent(View sender) {
         mPickImageLauncher.launch(mPickImageIntent);
     }
+
 }
