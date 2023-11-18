@@ -9,6 +9,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#EDE3E3"
+        android:backgroundTint="#EFF3C6"
         tools:context=".MainActivity">
 
         <Button
@@ -16,6 +18,7 @@
             android:layout_width="199dp"
             android:layout_height="64dp"
             android:layout_marginBottom="36dp"
+            android:backgroundTint="#8BC34A"
             android:text="Save"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"

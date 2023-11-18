@@ -9,6 +9,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#EFF3C6"
+        android:backgroundTint="#EFF3C6"
         tools:context=".MainActivity">
 
         <Button
@@ -16,6 +18,7 @@
             android:layout_width="199dp"
             android:layout_height="64dp"
             android:layout_marginBottom="36dp"
+            android:backgroundTint="#F48282"
             android:text="Menu"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -27,6 +30,7 @@
             android:layout_width="199dp"
             android:layout_height="64dp"
             android:layout_marginBottom="28dp"
+            android:backgroundTint="#CDDC39"
             android:text="Settings"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/importColorPickerImageButton"

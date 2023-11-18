@@ -10,14 +10,16 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#EFF3C6"
+        android:backgroundTint="#EFF3C6">
 
         <Button
             android:id="@+id/nextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#3045BC"
-            android:backgroundTint="#C3F36B"
+            android:backgroundTint="#CDDC39"
             android:text="@string/next"
             android:textColorHighlight="#68AE18"
             android:textColorHint="#8BC34A"

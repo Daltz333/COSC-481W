@@ -43,6 +43,7 @@
             android:layout_width="199dp"
             android:layout_height="64dp"
             android:layout_marginBottom="16dp"
+            android:backgroundTint="#F48282"
             android:text="Menu"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
