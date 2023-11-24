@@ -3,10 +3,15 @@ package edu.emich.tilere;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +19,8 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class Results extends Fragment {
+    private ArrayList<Result_Items_Manager> resultsList;
+    private RecyclerView recyclerView;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -49,10 +56,41 @@ public class Results extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+    }
+
+
+    @Override
+    public void onViewCreated(@androidx.annotation.NonNull View view, @androidx.annotation.Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        recyclerView = view.findViewById(R.id.recyclerView);
+        resultsList = new ArrayList<>();
+        setResultInfo();
+        setAdapter();
+    }
+
+
+    private void setAdapter() {
+        RecyclerAdapter adapter = new RecyclerAdapter(resultsList);
+
+        // Use requireContext() or getContext() to get the Context associated with the fragment
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(requireContext());
+
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
+    }
+
+
+    private void setResultInfo() {
+        resultsList.add(new Result_Items_Manager("Color1:"));
+        resultsList.add(new Result_Items_Manager("Color2:"));
+        resultsList.add(new Result_Items_Manager("Color3:"));
     }
 
     @Override
