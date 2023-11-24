@@ -228,7 +228,7 @@ public class ColorPicker extends View {
             m_bitmap = Bitmap.createScaledBitmap(m_bitmap, calculatedOutputWidth, calculatedOutputHeight, false);
         }
 
-        m_bitmapContainer.set(0, 0+kMagicOffset, calculatedOutputWidth, calculatedOutputHeight+kMagicOffset);
+        m_bitmapContainer.set(0, kMagicOffset, calculatedOutputWidth, calculatedOutputHeight+kMagicOffset);
         canvas.drawBitmap(m_bitmap, null, m_bitmapContainer, null);
 
     }
