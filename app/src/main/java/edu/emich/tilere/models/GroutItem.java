@@ -16,4 +16,33 @@ public class GroutItem {
         this.colorHex = colorHex;
         this.productLink = productLink;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getBrandName() {
+        return brandName;
+    }
+
+    public String getBrandCode() {
+        return brandCode;
+    }
+
+    public String getGroutName() {
+        return groutName;
+    }
+
+    public int getColorHex() {
+        return colorHex;
+    }
+
+    public String getProductLink() {
+        return productLink;
+    }
+
+    // This will be default to string.
+    public String toString() {
+        return id + ", " + brandName + ", " + groutName + ", " + colorHex + ", " + productLink;
+    }
 }

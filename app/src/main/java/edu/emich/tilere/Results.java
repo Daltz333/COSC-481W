@@ -3,6 +3,7 @@ package edu.emich.tilere;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,8 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import java.util.ArrayList;
+
+import edu.emich.tilere.api.DbClient;
+import edu.emich.tilere.models.GroutItem;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -78,7 +83,6 @@ public class Results extends Fragment {
     private void setAdapter() {
         RecyclerAdapter adapter = new RecyclerAdapter(resultsList);
 
-        // Use requireContext() or getContext() to get the Context associated with the fragment
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(requireContext());
 
         recyclerView.setLayoutManager(layoutManager);
@@ -88,15 +92,29 @@ public class Results extends Fragment {
 
 
     private void setResultInfo() {
-        resultsList.add(new Result_Items_Manager("Color1:"));
-        resultsList.add(new Result_Items_Manager("Color2:"));
-        resultsList.add(new Result_Items_Manager("Color3:"));
+        DbClient data = new DbClient();
+        ArrayList<GroutItem> items = data.getGrout();
+        for(GroutItem item : items) {
+            resultsList.add(new Result_Items_Manager(item.toString()));
+        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_results, container, false);
+        View view = inflater.inflate(R.layout.fragment_results, container, false);
+        try {
+            Button settings_button = (Button) view.findViewById(R.id.results_settings_button);
+            Button menu_button = (Button) view.findViewById(R.id.results_menu_button);
+            settings_button.setOnClickListener(args -> {
+                NavHostFragment.findNavController(this).navigate(R.id.settings);
+            });
+            menu_button.setOnClickListener(args -> {
+                NavHostFragment.findNavController(this).navigate(R.id.startPage);
+            });
+        } catch (Exception ignored) {}
+        return view;
     }
 }
