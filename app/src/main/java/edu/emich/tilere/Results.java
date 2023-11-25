@@ -92,7 +92,7 @@ public class Results extends Fragment {
 
 
     private void setResultInfo() {
-        DbClient data = new DbClient();
+        DbClient data = DbClient.getInstance();
         ArrayList<GroutItem> items = data.getGrout();
         for(GroutItem item : items) {
             resultsList.add(new Result_Items_Manager(item.toString()));

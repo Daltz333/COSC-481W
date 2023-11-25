@@ -33,6 +33,8 @@ public class DbClient {
         return _dbClient;
     }
 
+    private DbClient() {}
+
     private ArrayList<GroutItem> groutItems = new ArrayList<>();
     private boolean isGroutThreadRunning = false;
     private final Object lock = new Object();
