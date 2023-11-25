@@ -1,5 +1,13 @@
 package edu.emich.tilere.api;
 
+import android.util.Log;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -25,27 +33,85 @@ public class DbClient {
         return _dbClient;
     }
 
+    private ArrayList<GroutItem> groutItems = new ArrayList<>();
+    private boolean isGroutThreadRunning = false;
+    private final Object lock = new Object();
+
     /**
-     * Returns the list of Grout from memory and attempts to refresh in the background.
-     * If no grout exists in memory, this call is blocking.
-     * NOTE: Currently this method is stubbed
-     * @return List of grout items from the remote database
+     * Refreshes the list of grout asynchronously by starting up another thread
+     * And fetching it asynchronously
      */
-    public ArrayList<GroutItem> getGrout() {
-        ArrayList<GroutItem> items = new ArrayList<>();
-        Random random = new Random();
-        for (int i = 0; i < 15; i++) {
-            int nextInt = random.nextInt(256*256*256);
-            items.add(new GroutItem(
-                    (long)i,
-                    i + "Funny Brand",
-                    i + "-code",
-                    i + "-name",
-                    nextInt,
-                    "https://m.media-amazon.com/images/I/81m8NtsfFML.__AC_SX300_SY300_QL70_FMwebp_.jpg")
-            );
+    public void refreshGroutAsync() {
+        if (isGroutThreadRunning) {
+            return; // We're already running
         }
 
-        return items;
+        isGroutThreadRunning = true;
+        Thread t = new Thread(() -> {
+            try {
+                // Start connection to endpoint
+                URL dbUrl = Endpoints.getDbHostUri();
+                BufferedReader in = new BufferedReader(
+                        new InputStreamReader(
+                                dbUrl.openStream()
+                        )
+                );
+
+                // Read response
+                String json = "";
+                while (true) {
+                    String newLine = in.readLine();
+                    if (newLine == null) {
+                        break;
+                    } else {
+                        json = json + newLine;
+                    }
+                }
+                in.close();
+
+                // Copy into memory
+                ArrayList<GroutItem> tempItems = new ArrayList<>();
+
+                // Parse JSON
+                JSONArray jsonRoot = new JSONArray(json);
+                for (int i = 0; i < jsonRoot.length(); i++) {
+                    JSONObject obj = jsonRoot.getJSONObject(i);
+                    String brandName = obj.getString("brandName");
+                    String brandCode = obj.getString("brandCode");
+                    String groutName = obj.getString("groutName");
+                    String hexAsString = obj.getString("colorHex");
+                    int hex = 0;
+
+                    try {
+                        hex = Integer.decode(hexAsString);
+                    } catch (NumberFormatException e) {
+                        Log.e("refreshGroutAsync", "Failed to parse hex input " + hexAsString);
+                    }
+                    tempItems.add(new GroutItem(brandName, brandCode, groutName, hex));
+                }
+
+                // Acquire mutex and replace the public copy
+                synchronized (lock) {
+                    groutItems = tempItems;
+                }
+            } catch (Exception ex) {
+                Log.e("refreshGroutAsync", "Exception occurred while attempting to refresh grout: " + ex.toString());
+            }
+
+            isGroutThreadRunning = false;
+        });
+
+        t.setName("refreshGroutThread");
+        t.setDaemon(true); // kill thread on application sleep
+        t.start();
+    }
+
+    /**
+     * Returns the list of Grout from memory
+     */
+    public ArrayList<GroutItem> getGrout() {
+        synchronized (lock) {
+            return groutItems;
+        }
     }
 }
