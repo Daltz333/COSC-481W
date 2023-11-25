@@ -63,7 +63,7 @@ public class Settings extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
         try {
-            Button save_button = (Button) view.findViewById(R.id.importColorPickerImageButton);
+            Button save_button = (Button) view.findViewById(R.id.results_menu_button);
             save_button.setOnClickListener(args -> {
                 NavHostFragment.findNavController(this).navigate(R.id.startPage);
             });
