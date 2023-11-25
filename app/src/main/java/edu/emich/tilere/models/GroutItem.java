@@ -15,10 +15,6 @@ public class GroutItem {
         this.productLink = "https://www.amazon.com/Red-Devil-0425-Pre-Mixed-Squeeze/dp/B000VZOPLY/";
     }
 
-    public Long getId() {
-        return id;
-    }
-
     public String getBrandName() {
         return brandName;
     }
@@ -41,6 +37,6 @@ public class GroutItem {
 
     // This will be default to string.
     public String toString() {
-        return id + ", " + brandName + ", " + groutName + ", " + colorHex + ", " + productLink;
+        return brandName + ", " + groutName + ", " + colorHex + ", " + productLink;
     }
 }
