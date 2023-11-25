@@ -14,6 +14,7 @@ import android.view.View;
 
 import java.io.IOException;
 
+import edu.emich.tilere.api.DbClient;
 import edu.emich.tilere.colorpicker.ColorPicker;
 import edu.emich.tilere.utils.ImageUtils;
 
@@ -22,6 +23,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Refresh grout
+        DbClient.getInstance().refreshGroutAsync();
     }
 
 }
