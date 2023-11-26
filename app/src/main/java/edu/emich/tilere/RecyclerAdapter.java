@@ -9,19 +9,29 @@ import java.util.ArrayList;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>{
-    private ArrayList<Result_Items_Manager> pageResults;
+import edu.emich.tilere.models.GroutItem;
 
-    public RecyclerAdapter(ArrayList<Result_Items_Manager> pageResults) {
+public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>{
+    private ArrayList<GroutItem> pageResults;
+
+    public RecyclerAdapter(ArrayList<GroutItem> pageResults) {
         this.pageResults = pageResults;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        private TextView text1;
+        private TextView brand_name;
+        private TextView brand_code;
+        private TextView grout_name;
+        private TextView color_hex;
+        private TextView product_link;
 
         public MyViewHolder(final View view) {
             super(view);
-            text1 = view.findViewById(R.id.recycler1);
+            brand_name = view.findViewById(R.id.brand);
+            brand_code = view.findViewById(R.id.color);
+            grout_name = view.findViewById(R.id.grout);
+            color_hex = view.findViewById(R.id.hex);
+            product_link = view.findViewById(R.id.link);
         }
     }
 
@@ -34,8 +44,20 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerAdapter.MyViewHolder holder, int position) {
-        String this_text1 = pageResults.get(position).getResult();
-        holder.text1.setText(this_text1);
+        String this_text = pageResults.get(position).getBrandName();
+        holder.brand_name.setText(this_text);
+
+        this_text = pageResults.get(position).getBrandCode();
+        holder.brand_code.setText(this_text);
+
+        this_text = pageResults.get(position).getGroutName();
+        holder.grout_name.setText(this_text);
+
+        this_text = Integer.toHexString(pageResults.get(position).getColorHex());
+        holder.color_hex.setText(this_text);
+
+        this_text = pageResults.get(position).getProductLink();
+        holder.product_link.setText(this_text);
     }
 
     @Override
