@@ -24,7 +24,7 @@ import edu.emich.tilere.models.GroutItem;
  * create an instance of this fragment.
  */
 public class Results extends Fragment {
-    private ArrayList<Result_Items_Manager> resultsList;
+    private ArrayList<GroutItem> resultsList;
     private RecyclerView recyclerView;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -95,7 +95,7 @@ public class Results extends Fragment {
         DbClient data = DbClient.getInstance();
         ArrayList<GroutItem> items = data.getGrout();
         for(GroutItem item : items) {
-            resultsList.add(new Result_Items_Manager(item.toString()));
+            resultsList.add(item);
         }
 
     }
