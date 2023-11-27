@@ -82,17 +82,5 @@
             app:layout_constraintVertical_bias="0.071"
             tools:fontFamily="@font/archivo_black" />
 
-        <ImageView
-            android:id="@+id/imageView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="-255dp"
-            android:scaleX="0.55"
-            android:scaleY=".55"
-            android:src="@drawable/logo_circle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/about_button" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

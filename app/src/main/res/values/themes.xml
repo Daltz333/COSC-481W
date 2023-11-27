@@ -3,9 +3,16 @@
     <style name="Base.Theme.THP" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-
-
+    </style>
+    <style name="Theme.THP" parent="Base.Theme.THP" />
+    <style name="Theme.THP.Starting" parent="Theme.SplashScreen">
+        <!-- Set the splash screen background to black -->
+        <item name="windowSplashScreenBackground">@color/colorPrimaryDark</item>
+        <!-- Use windowSplashScreenAnimatedIcon to add a drawable or an animated
+             drawable. -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/logo_circle_splash</item>
+        <!-- Set the theme of the Activity that follows your splash screen. -->
+        <item name="postSplashScreenTheme">@style/Theme.THP</item>
     </style>
 
-    <style name="Theme.THP" parent="Base.Theme.THP" />
 </resources>
