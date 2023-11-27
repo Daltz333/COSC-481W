@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "TileRE"
+rootProject.name = "THP"
 include ':app'

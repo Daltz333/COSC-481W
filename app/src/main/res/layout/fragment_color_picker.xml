@@ -65,7 +65,7 @@
         app:layout_constraintTop_toBottomOf="@+id/results_menu_button"
         app:layout_constraintVertical_bias="0.0">
 
-        <edu.emich.tilere.colorpicker.ColorPicker
+        <edu.emich.thp.colorpicker.ColorPicker
             android:id="@+id/colorPicker"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

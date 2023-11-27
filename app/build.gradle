@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace 'edu.emich.tilere'
+    namespace 'edu.emich.thp'
     compileSdk 34
 
     composeOptions {
@@ -12,7 +12,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "edu.emich.tilere"
+        applicationId "edu.emich.thp"
         minSdk 26
         targetSdk 34
         versionCode 1

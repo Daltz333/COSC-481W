@@ -1,4 +1,4 @@
-package edu.emich.tilere;
+package edu.emich.thp;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("edu.emich.tilere", appContext.getPackageName());
+        assertEquals("edu.emich.thp", appContext.getPackageName());
     }
 }

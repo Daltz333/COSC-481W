@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/colorPickerFragment"
-        android:name="edu.emich.tilere.ColorPickerFragment"
+        android:name="edu.emich.thp.ColorPickerFragment"
         android:label="fragment_color_picker"
         tools:layout="@layout/fragment_color_picker" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/startPage"
-        android:name="edu.emich.tilere.StartPage"
+        android:name="edu.emich.thp.StartPage"
         android:label="fragment_start_page"
         tools:layout="@layout/fragment_start_page" >
         <action
@@ -31,17 +31,17 @@
     </fragment>
     <fragment
         android:id="@+id/about"
-        android:name="edu.emich.tilere.About"
+        android:name="edu.emich.thp.About"
         android:label="fragment_about"
         tools:layout="@layout/fragment_about" />
     <fragment
         android:id="@+id/settings"
-        android:name="edu.emich.tilere.Settings"
+        android:name="edu.emich.thp.Settings"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/results"
-        android:name="edu.emich.tilere.Results"
+        android:name="edu.emich.thp.Results"
         android:label="fragment_results"
         tools:layout="@layout/fragment_results" />
 </navigation>

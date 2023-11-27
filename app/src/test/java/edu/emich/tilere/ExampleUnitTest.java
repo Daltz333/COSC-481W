@@ -1,4 +1,4 @@
-package edu.emich.tilere;
+package edu.emich.thp;
 
 import org.junit.Test;
 
