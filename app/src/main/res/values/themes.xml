@@ -19,11 +19,11 @@
     </style>
 
     <!-- Global overrides -->
-    <style name="GlobalButtonStyle" parent="android:Widget.Button">
+    <style name="GlobalButtonStyle" parent="android:Widget.Material.Button">
         <item name="fontFamily">@font/lato</item>
     </style>
 
-    <style name="GlobalTextViewStyle" parent="android:Widget.TextView">
+    <style name="GlobalTextViewStyle" parent="android:Widget.Material.TextView">
         <item name="fontFamily">@font/lato</item>
     </style>
 

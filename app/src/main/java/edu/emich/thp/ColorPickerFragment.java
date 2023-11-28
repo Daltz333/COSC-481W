@@ -73,16 +73,12 @@ public class ColorPickerFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_color_picker, container, false);
-        try {
-            Button back_button = (Button) view.findViewById(R.id.back_button);
-            Button next_button = (Button) view.findViewById(R.id.next_button);
-            back_button.setOnClickListener(args -> {
-                NavHostFragment.findNavController(this).navigate(R.id.startPage);
-            });
-            next_button.setOnClickListener(args -> {
-                NavHostFragment.findNavController(this).navigate(R.id.results);
-            });
-        } catch (Exception ignored) {}
+
+        Button next_button = (Button)view.findViewById(R.id.colorPickerDoneButton);
+        next_button.setOnClickListener(args -> {
+            NavHostFragment.findNavController(this).navigate(R.id.results);
+        });
+
         return view;
     }
 }
