@@ -62,12 +62,6 @@ public class About extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_about, container, false);
-        try {
-            Button menu_button = (Button) view.findViewById(R.id.menu_button);
-            menu_button.setOnClickListener(args -> {
-                NavHostFragment.findNavController(this).navigate(R.id.startPage);
-            });
-        } catch (Exception ignored) {}
         return view;
     }
 }

@@ -34,6 +34,11 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(globalToolbar);
         globalToolbar.showOverflowMenu();
 
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle("THP - Grout Recognition");
+        }
+
         // Setup navigation listener
         var navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView);
         if (navHostFragment != null) {

@@ -12,6 +12,10 @@
         tools:layout="@layout/fragment_color_picker" >
         <action
             android:id="@+id/action_colorPickerFragment_to_results"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popExitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
             app:destination="@id/results" />
     </fragment>
     <fragment
@@ -21,12 +25,24 @@
         tools:layout="@layout/fragment_start_page" >
         <action
             android:id="@+id/action_startPage_to_colorPickerFragment"
-            app:destination="@id/colorPickerFragment" />
+            app:destination="@id/colorPickerFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popExitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in" />
         <action
             android:id="@+id/action_startPage_to_about"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popExitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
             app:destination="@id/about" />
         <action
             android:id="@+id/action_startPage_to_settings"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popExitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
             app:destination="@id/settings" />
     </fragment>
     <fragment
