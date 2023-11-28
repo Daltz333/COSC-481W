@@ -95,20 +95,39 @@ public class Results extends Fragment {
 
     private void setResultInfo() {
         DbClient data = DbClient.getInstance();
-        ArrayList<GroutItem> items = data.getGrout();
-
-        // Number of results to be displayed
-        int numResults = 3;
+        ArrayList<GroutItem> initialItems = data.getGrout();
+        ArrayList<GroutItem> items = new ArrayList<>();
 
         GlobalSettings settings = GlobalSettings.getInstance();
+
+        // Filter the results by brand
+        for(GroutItem initialItem : initialItems) {
+            if(initialItem.getBrandName().equals("Mapei") && settings.includeMapei() == true) {
+                items.add(initialItem);
+            }
+            else if(initialItem.getBrandName().equals("Tec") && settings.includeTec() == true) {
+                items.add(initialItem);
+            }
+        }
+
+        // Number of results to be displayed
+        int numResults = settings.getNumSearchResults();
+
+
         String targetHex =  Integer.toHexString(settings.getHexColor());
+        targetHex = targetHex.substring(2);
         if(targetHex.length() < 6) {
             targetHex = "0" + targetHex;
         }
+        try {
 
-        int targetRed = Integer.parseInt(targetHex.substring(2, 4), 16);    // SAMPLE TARGET VALUES. THIS IS WHITE
-        int targetGreen = Integer.parseInt(targetHex.substring(4, 6), 16);
-        int targetBlue = Integer.parseInt(targetHex.substring(6, 8), 16);
+        }
+        catch (Exception e) {
+            Log.e("invalidHexCode", "The following hex cannot be used: " + targetHex);
+        }
+        int targetRed = Integer.parseInt(targetHex.substring(0, 2), 16);
+        int targetGreen = Integer.parseInt(targetHex.substring(2, 4), 16);
+        int targetBlue = Integer.parseInt(targetHex.substring(4, 6), 16);
 
         // Perform nearest neighbor algorithm
         for(int i = 0; i < items.size(); i++) {
@@ -177,16 +196,6 @@ public class Results extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_results, container, false);
-        try {
-            Button settings_button = (Button) view.findViewById(R.id.results_settings_button);
-            Button menu_button = (Button) view.findViewById(R.id.results_menu_button);
-            settings_button.setOnClickListener(args -> {
-                NavHostFragment.findNavController(this).navigate(R.id.settings);
-            });
-            menu_button.setOnClickListener(args -> {
-                NavHostFragment.findNavController(this).navigate(R.id.startPage);
-            });
-        } catch (Exception ignored) {}
         return view;
     }
 }

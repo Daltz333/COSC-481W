@@ -16,6 +16,10 @@ import edu.emich.thp.models.GroutItem;
 
 public class GlobalSettings {
     private int hexColor = 0;
+    private boolean includeMapei = true;
+    private boolean includeTec = true;
+    private int numSearchResults = 3;
+
     private static GlobalSettings _GlobalSettings = null;
 
     public static GlobalSettings getInstance() {
@@ -24,6 +28,30 @@ public class GlobalSettings {
         }
 
         return _GlobalSettings;
+    }
+
+    public int getNumSearchResults() {
+        return numSearchResults;
+    }
+
+    public void setNumSearchResults(int numSearchResults) {
+        this.numSearchResults = numSearchResults;
+    }
+
+    public boolean includeMapei() {
+        return includeMapei;
+    }
+
+    public void setIncludeMapei(boolean includeMapei) {
+        this.includeMapei = includeMapei;
+    }
+
+    public boolean includeTec() {
+        return includeTec;
+    }
+
+    public void setIncludeTec(boolean includeTec) {
+        this.includeTec = includeTec;
     }
 
     private GlobalSettings() {}
