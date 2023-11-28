@@ -81,6 +81,7 @@ public class ColorPicker extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+
         // Just in case, let's size check
         if (this.getWidth() != 0 || this.getHeight() != 0) {
             // DRAW BITMAP
