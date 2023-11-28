@@ -65,12 +65,24 @@ public class MainActivity extends AppCompatActivity {
         var actionBar = getSupportActionBar();
 
         if (actionBar != null) {
-            if (dest.getId() != R.id.startPage) {
-                actionBar.setDisplayShowHomeEnabled(true);
-                actionBar.setDisplayHomeAsUpEnabled(true);
-            } else {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowHomeEnabled(true);
+
+            if (dest.getId() == R.id.startPage) {
                 actionBar.setDisplayHomeAsUpEnabled(false);
                 actionBar.setDisplayShowHomeEnabled(false);
+
+                actionBar.setTitle("THP - Grout Recognition");
+            } else if (dest.getId() == R.id.about) {
+                actionBar.setTitle("About Us");
+            } else if (dest.getId() == R.id.settings) {
+                actionBar.setTitle("Settings");
+            } else if (dest.getId() == R.id.colorPickerFragment) {
+                actionBar.setTitle("Grout Recognition");
+            } else if (dest.getId() == R.id.results) {
+                actionBar.setTitle("Analysis Results");
+            } else {
+                actionBar.setTitle("THP - Grout Recognition");
             }
         }
 
