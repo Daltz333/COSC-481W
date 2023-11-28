@@ -2,6 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <!-- Settings, must always be in the overflow. -->
+    <item
+        android:id="@+id/action_help"
+        android:icon="@drawable/question_mark"
+        android:title="Help"
+        app:showAsAction="always" />
     <item android:id="@+id/action_settings"
         android:title="Settings"
         app:showAsAction="never"/>

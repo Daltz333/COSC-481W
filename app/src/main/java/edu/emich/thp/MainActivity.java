@@ -114,6 +114,11 @@ public class MainActivity extends AppCompatActivity {
                 navHostFragment.getNavController().navigate(R.id.about);
             } else if (item.getItemId() == R.id.action_settings) {
                 navHostFragment.getNavController().navigate(R.id.settings);
+            } else if (item.getItemId() == R.id.action_help) {
+                new AlertDialog.Builder(MainActivity.this)
+                        .setTitle("Grout Recognition")
+                        .setMessage("Welcome to the THP Grout Recognition app. This application guides you through the process of identifying what kind of grout your tile may be laid with.\n\nMatching grout colors is important for maintaining a certain aesthetic.")
+                        .show();
             } else {
                 return super.onOptionsItemSelected(item);
             }
