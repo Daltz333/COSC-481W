@@ -12,7 +12,7 @@ public class GroutItem {
         this.brandCode = brandCode;
         this.groutName = groutName;
         this.colorHex = colorHex;
-        this.productLink = "https://www.amazon.com/Red-Devil-0425-Pre-Mixed-Squeeze/dp/B000VZOPLY/";
+        this.productLink = "https://google.com/search?q=grout%20" + brandName + "%20" + brandCode;
     }
 
     public String getBrandName() {
