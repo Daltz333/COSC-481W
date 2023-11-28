@@ -53,7 +53,40 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         this_text = pageResults.get(position).getGroutName();
         holder.grout_name.setText(this_text);
 
-        this_text = Integer.toHexString(pageResults.get(position).getColorHex());
+
+        int temp = pageResults.get(position).getColorHex();
+
+        // Red
+        String temp2 = Integer.toString(temp);
+        if(temp2.length() < 9) {
+            temp2 = "0" + temp2;
+        }
+        String red = Integer.toHexString(Integer.parseInt(temp2.substring(0, 3)));
+        if(red.length() < 2) {
+            red = "0" + red;
+        }
+
+        // Green
+        temp2 = Integer.toString(temp);
+        if(temp2.length() < 9) {
+            temp2 = "0" + temp2;
+        }
+        String green = Integer.toHexString(Integer.parseInt(temp2.substring(3, 6)));
+        if(green.length() < 2) {
+            green = "0" + red;
+        }
+
+        // Blue
+        temp2 = Integer.toString(temp);
+        if(temp2.length() < 9) {
+            temp2 = "0" + temp2;
+        }
+        String blue = Integer.toHexString(Integer.parseInt(temp2.substring(6, 9)));
+        if(blue.length() < 2) {
+            blue = "0" + red;
+        }
+
+        this_text = red + green + blue;
         holder.color_hex.setText(this_text);
 
         this_text = pageResults.get(position).getProductLink();
