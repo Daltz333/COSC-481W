@@ -116,7 +116,7 @@ public class Results extends Fragment {
 
         String targetHex =  Integer.toHexString(settings.getHexColor());
         targetHex = targetHex.substring(2);
-        if(targetHex.length() < 6) {
+        while(targetHex.length() < 6) {
             targetHex = "0" + targetHex;
         }
         try {

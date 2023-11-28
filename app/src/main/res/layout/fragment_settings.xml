@@ -11,17 +11,6 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-        <Button
-            android:id="@+id/results_menu_button"
-            android:layout_width="199dp"
-            android:layout_height="64dp"
-            android:layout_marginBottom="36dp"
-            android:text="Save"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
         <TextView
             android:id="@+id/textView2"
             android:layout_width="389dp"
@@ -94,7 +83,7 @@
             tools:fontFamily="@font/archivo_black" />
 
         <Switch
-            android:id="@+id/switch2"
+            android:id="@+id/tec_switch"
             android:layout_width="63dp"
             android:layout_height="24dp"
             android:layout_marginEnd="19dp"
@@ -103,7 +92,7 @@
             app:layout_constraintEnd_toEndOf="parent" />
 
         <Switch
-            android:id="@+id/switch1"
+            android:id="@+id/mapei_switch"
             android:layout_width="63dp"
             android:layout_height="24dp"
             android:layout_marginEnd="19dp"
@@ -112,14 +101,12 @@
             app:layout_constraintEnd_toEndOf="parent" />
 
         <EditText
-            android:id="@+id/editTextNumber2"
+            android:id="@+id/input_number"
             android:layout_width="115dp"
             android:layout_height="38dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:ems="10"
             android:inputType="number"
-            android:text="Enter number"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
