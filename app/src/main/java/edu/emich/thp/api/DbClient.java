@@ -85,11 +85,37 @@ public class DbClient {
                     int hex = 0;
 
                     try {
-                        hex = Integer.decode(hexAsString);
+                        String red = Integer.toString(Integer.parseInt(hexAsString.substring(1, 3), 16));
+                        if (red.length() < 3) {
+                            red = "0" + red;
+                        }
+
+                        String green = Integer.toString(Integer.parseInt(hexAsString.substring(3, 5), 16));
+                        if (green.length() < 3) {
+                            green = "0" + green;
+                        }
+                        String blue = Integer.toString(Integer.parseInt(hexAsString.substring(5, 7), 16));
+                        if (blue.length() < 3) {
+                            blue = "0" + blue;
+                        }
+
+                        hex = Integer.parseInt(red + green + blue);
+
                     } catch (NumberFormatException e) {
                         Log.e("refreshGroutAsync", "Failed to parse hex input " + hexAsString);
                     }
-                    tempItems.add(new GroutItem(brandName, brandCode, groutName, hex));
+                    if(hex != 0) {
+                        boolean duplicate = false;
+                        for(GroutItem item : tempItems) {
+                            if(item.getGroutName().equals(groutName)) {
+                                duplicate = true;
+                                break;
+                            }
+                        }
+                        if(!duplicate) {
+                            tempItems.add(new GroutItem(brandName, brandCode, groutName, hex));
+                        }
+                    }
                 }
 
                 // Acquire mutex and replace the public copy
