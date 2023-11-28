@@ -33,10 +33,10 @@ import edu.emich.thp.utils.AndroidUtils;
  */
 public class ColorPicker extends View {
     // Whether to draw the bitmap in m_bitmap
-    private boolean toDrawBitmap = false;
+    private static boolean toDrawBitmap = false;
 
     // Bitmap to be drawn
-    private Bitmap m_bitmap;
+    private static Bitmap m_bitmap;
     private double m_lastXPos = 0.0;
     private double m_lastYPos = 0.0;
 
@@ -233,11 +233,9 @@ public class ColorPicker extends View {
 
     }
 
-    public void setImage(Bitmap image) {
+    public static void setImage(Bitmap image) {
         toDrawBitmap = true;
         m_bitmap = image;
-
-        invalidate();
     }
     
 }

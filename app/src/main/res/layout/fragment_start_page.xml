@@ -1,86 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTint="@color/inverseDayNight"
+    android:foregroundTint="@android:color/white"
     tools:context=".StartPage">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo_circle"
+        tools:src="@drawable/logo_circle"
+        tools:srcCompat="@drawable/logo_circle" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/phoneNumber">
 
-        <Button
-            android:id="@+id/about_button"
-            android:layout_width="199dp"
-            android:layout_height="64dp"
-            android:layout_marginStart="106dp"
-            android:layout_marginTop="34dp"
-            android:layout_marginEnd="106dp"
-            android:text="About"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/settings_button" />
-
-        <Button
-            android:id="@+id/settings_button"
-            android:layout_width="199dp"
-            android:layout_height="64dp"
-            android:layout_marginStart="106dp"
-            android:layout_marginTop="34dp"
-            android:layout_marginEnd="106dp"
-            android:text="Settings"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/start_button" />
-
-        <Button
-            android:id="@+id/start_button"
-            android:layout_width="199dp"
-            android:layout_height="64dp"
-            android:layout_marginStart="106dp"
-            android:layout_marginTop="45dp"
-            android:layout_marginEnd="106dp"
-            android:layout_marginBottom="34dp"
-            android:text="Start"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/settings_button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="389dp"
-            android:layout_height="77dp"
-            android:layout_marginTop="8dp"
-            android:text="Grout Recognition"
-            android:textAlignment="center"
-            android:textSize="34sp"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/selectPhotoButton"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="135dp"
+            android:layout_height="0dp"
+            android:background="#FFFFFF"
+            android:insetLeft="0dp"
+            android:insetTop="0dp"
+            android:insetRight="0dp"
+            android:insetBottom="0dp"
+            android:text="IMPORT"
+            app:backgroundTint="@color/inverseDayNight"
+            app:iconPadding="0dp"
+            app:iconSize="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.189"
-            tools:fontFamily="@font/archivo_black" />
+            app:layout_constraintVertical_bias="0.0"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Button.Rounded"
+            tools:ignore="TextContrastCheck" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="389dp"
-            android:layout_height="77dp"
-            android:layout_marginTop="8dp"
-            android:text="THP"
-            android:textAlignment="center"
-            android:textSize="60sp"
+        <ImageButton
+            android:id="@+id/takePhotoButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/take_photo"
+            android:tint="@color/inverseDayNight"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.071"
-            tools:fontFamily="@font/archivo_black" />
-
+            tools:ignore="SpeakableTextPresentCheck,UseAppTint" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-</FrameLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="An EMU student project"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/descriptionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="16070 NORTHVILLE RD PLYMOUTH MI 48170"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/phoneNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="248-388-8772"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionText" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

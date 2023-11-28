@@ -6,4 +6,5 @@
     <color name="secondaryLight">#e8a941</color>
     <color name="colorAccent">#e8a941</color>
     <color name="backgroundPrimary">#2b2b2b</color>
+    <color name="inverseDayNight">#212121</color>
 </resources>
