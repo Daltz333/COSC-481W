@@ -66,31 +66,31 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
         // Red
         String temp2 = Integer.toString(temp);
-        if(temp2.length() < 9) {
+        while(temp2.length() < 9) {
             temp2 = "0" + temp2;
         }
         String red = Integer.toHexString(Integer.parseInt(temp2.substring(0, 3)));
-        if(red.length() < 2) {
+        while(red.length() < 2) {
             red = "0" + red;
         }
 
         // Green
         temp2 = Integer.toString(temp);
-        if(temp2.length() < 9) {
+        while(temp2.length() < 9) {
             temp2 = "0" + temp2;
         }
         String green = Integer.toHexString(Integer.parseInt(temp2.substring(3, 6)));
-        if(green.length() < 2) {
+        while(green.length() < 2) {
             green = "0" + red;
         }
 
         // Blue
         temp2 = Integer.toString(temp);
-        if(temp2.length() < 9) {
+        while(temp2.length() < 9) {
             temp2 = "0" + temp2;
         }
         String blue = Integer.toHexString(Integer.parseInt(temp2.substring(6, 9)));
-        if(blue.length() < 2) {
+        while(blue.length() < 2) {
             blue = "0" + red;
         }
 

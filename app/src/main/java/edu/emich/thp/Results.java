@@ -95,20 +95,39 @@ public class Results extends Fragment {
 
     private void setResultInfo() {
         DbClient data = DbClient.getInstance();
-        ArrayList<GroutItem> items = data.getGrout();
-
-        // Number of results to be displayed
-        int numResults = 3;
+        ArrayList<GroutItem> initialItems = data.getGrout();
+        ArrayList<GroutItem> items = new ArrayList<>();
 
         GlobalSettings settings = GlobalSettings.getInstance();
-        String targetHex =  Integer.toHexString(settings.getHexColor());
-        if(targetHex.length() < 6) {
-            targetHex = "0" + targetHex;
+
+        // Filter the results by brand
+        for(GroutItem initialItem : initialItems) {
+            if(initialItem.getBrandName().equals("Mapei") && settings.includeMapei() == true) {
+                items.add(initialItem);
+            }
+            else if(initialItem.getBrandName().equals("Tec") && settings.includeTec() == true) {
+                items.add(initialItem);
+            }
         }
 
-        int targetRed = Integer.parseInt(targetHex.substring(2, 4), 16);    // SAMPLE TARGET VALUES. THIS IS WHITE
-        int targetGreen = Integer.parseInt(targetHex.substring(4, 6), 16);
-        int targetBlue = Integer.parseInt(targetHex.substring(6, 8), 16);
+        // Number of results to be displayed
+        int numResults = settings.getNumSearchResults();
+
+
+        String targetHex =  Integer.toHexString(settings.getHexColor());
+        targetHex = targetHex.substring(2);
+        while(targetHex.length() < 6) {
+            targetHex = "0" + targetHex;
+        }
+        try {
+
+        }
+        catch (Exception e) {
+            Log.e("invalidHexCode", "The following hex cannot be used: " + targetHex);
+        }
+        int targetRed = Integer.parseInt(targetHex.substring(0, 2), 16);
+        int targetGreen = Integer.parseInt(targetHex.substring(2, 4), 16);
+        int targetBlue = Integer.parseInt(targetHex.substring(4, 6), 16);
 
         // Perform nearest neighbor algorithm
         for(int i = 0; i < items.size(); i++) {
