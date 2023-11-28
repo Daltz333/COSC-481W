@@ -115,15 +115,19 @@ public class Results extends Fragment {
 
 
         String targetHex =  Integer.toHexString(settings.getHexColor());
-        targetHex = targetHex.substring(2);
-        while(targetHex.length() < 6) {
-            targetHex = "0" + targetHex;
-        }
-        try {
+        if (targetHex.length() >= 2) {
+            targetHex = targetHex.substring(2);
+            while (targetHex.length() < 6) {
+                targetHex = "0" + targetHex;
+            }
+            try {
 
-        }
-        catch (Exception e) {
-            Log.e("invalidHexCode", "The following hex cannot be used: " + targetHex);
+            } catch (Exception e) {
+                Log.e("invalidHexCode", "The following hex cannot be used: " + targetHex);
+            }
+        } else {
+            targetHex = "FFFFFF";
+
         }
         int targetRed = Integer.parseInt(targetHex.substring(0, 2), 16);
         int targetGreen = Integer.parseInt(targetHex.substring(2, 4), 16);
