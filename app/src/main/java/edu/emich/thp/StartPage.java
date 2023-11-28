@@ -2,6 +2,7 @@ package edu.emich.thp;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -10,11 +11,13 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import java.io.IOException;
 
@@ -29,7 +32,9 @@ import edu.emich.thp.utils.ImageUtils;
 public class StartPage extends Fragment {
 
     private Intent mPickImageIntent;
+    private Intent mTakeImageIntent;
     private ActivityResultLauncher<Intent> mPickImageLauncher;
+    private ActivityResultLauncher<Intent> mTakePhotoLauncher;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -80,7 +85,12 @@ public class StartPage extends Fragment {
         // Wire up buttons
         Button selectPhotoButton = view.findViewById(R.id.selectPhotoButton);
         selectPhotoButton.setOnClickListener(s -> {
-            startImportImageIntent(view);
+            mPickImageLauncher.launch(mPickImageIntent);
+        });
+
+        ImageButton takePhotoButton = view.findViewById(R.id.takePhotoButton);
+        takePhotoButton.setOnClickListener(s -> {
+            mTakePhotoLauncher.launch(mTakeImageIntent);
         });
 
         setupIntents(view);
@@ -90,6 +100,24 @@ public class StartPage extends Fragment {
     private void setupIntents(View view) {
         mPickImageIntent = new Intent(Intent.ACTION_GET_CONTENT);
         mPickImageIntent.setType("image/*");
+
+        mTakeImageIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        mTakePhotoLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            // Handle activity result
+            var data = result.getData();
+            if (data != null) {
+                Bundle extras = data.getExtras();
+
+                if (extras == null) {
+                    return;
+                }
+
+                Bitmap image = (Bitmap)data.getExtras().get("data");
+                ColorPicker.setImage(image);
+
+                NavHostFragment.findNavController(this).navigate(R.id.colorPickerFragment);
+            }
+        });
 
         mPickImageLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             // Handle activity result
@@ -110,9 +138,5 @@ public class StartPage extends Fragment {
                 }
             }
         });
-    }
-
-    public void startImportImageIntent(View sender) {
-        mPickImageLauncher.launch(mPickImageIntent);
     }
 }
