@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
@@ -47,6 +48,17 @@ public class MainActivity extends AppCompatActivity {
 
         // Refresh grout
         DbClient.getInstance().refreshGroutAsync();
+
+        Thread t = new Thread(() -> {
+            var items = DbClient.getInstance().getGrout();
+
+            runOnUiThread(() -> {
+                Toast.makeText(getApplicationContext(), "Loaded " + items.size() + " items from database.", Toast.LENGTH_SHORT).show();
+            });
+        });
+
+        t.setDaemon(true);
+        t.start();
     }
 
     public void handleDestinationChanged(NavController controller, NavDestination dest, Bundle args) {

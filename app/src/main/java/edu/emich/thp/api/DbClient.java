@@ -50,80 +50,80 @@ public class DbClient {
 
         isGroutThreadRunning = true;
         Thread t = new Thread(() -> {
-            try {
-                // Start connection to endpoint
-                URL dbUrl = Endpoints.getDbHostUri();
-                BufferedReader in = new BufferedReader(
-                        new InputStreamReader(
-                                dbUrl.openStream()
-                        )
-                );
+            synchronized (lock) {
+                try {
+                    // Start connection to endpoint
+                    URL dbUrl = Endpoints.getDbHostUri();
+                    BufferedReader in = new BufferedReader(
+                            new InputStreamReader(
+                                    dbUrl.openStream()
+                            )
+                    );
 
-                // Read response
-                String json = "";
-                while (true) {
-                    String newLine = in.readLine();
-                    if (newLine == null) {
-                        break;
-                    } else {
-                        json = json + newLine;
+                    // Read response
+                    String json = "";
+                    while (true) {
+                        String newLine = in.readLine();
+                        if (newLine == null) {
+                            break;
+                        } else {
+                            json = json + newLine;
+                        }
                     }
-                }
-                in.close();
+                    in.close();
 
-                // Copy into memory
-                ArrayList<GroutItem> tempItems = new ArrayList<>();
+                    // Copy into memory
+                    ArrayList<GroutItem> tempItems = new ArrayList<>();
 
-                // Parse JSON
-                JSONArray jsonRoot = new JSONArray(json);
-                for (int i = 0; i < jsonRoot.length(); i++) {
-                    JSONObject obj = jsonRoot.getJSONObject(i);
-                    String brandName = obj.getString("brandName");
-                    String brandCode = obj.getString("brandCode");
-                    String groutName = obj.getString("groutName");
-                    String hexAsString = obj.getString("colorHex");
-                    int hex = 0;
+                    // Parse JSON
+                    JSONArray jsonRoot = new JSONArray(json);
+                    for (int i = 0; i < jsonRoot.length(); i++) {
+                        JSONObject obj = jsonRoot.getJSONObject(i);
+                        String brandName = obj.getString("brandName");
+                        String brandCode = obj.getString("brandCode");
+                        String groutName = obj.getString("groutName");
+                        String hexAsString = obj.getString("colorHex");
+                        int hex = 0;
 
-                    try {
-                        String red = Integer.toString(Integer.parseInt(hexAsString.substring(1, 3), 16));
-                        if (red.length() < 3) {
-                            red = "0" + red;
+                        try {
+                            String red = Integer.toString(Integer.parseInt(hexAsString.substring(1, 3), 16));
+                            if (red.length() < 3) {
+                                red = "0" + red;
+                            }
+
+                            String green = Integer.toString(Integer.parseInt(hexAsString.substring(3, 5), 16));
+                            if (green.length() < 3) {
+                                green = "0" + green;
+                            }
+                            String blue = Integer.toString(Integer.parseInt(hexAsString.substring(5, 7), 16));
+                            if (blue.length() < 3) {
+                                blue = "0" + blue;
+                            }
+
+                            hex = Integer.parseInt(red + green + blue);
+
+                        } catch (NumberFormatException e) {
+                            Log.e("refreshGroutAsync", "Failed to parse hex input " + hexAsString);
                         }
-
-                        String green = Integer.toString(Integer.parseInt(hexAsString.substring(3, 5), 16));
-                        if (green.length() < 3) {
-                            green = "0" + green;
-                        }
-                        String blue = Integer.toString(Integer.parseInt(hexAsString.substring(5, 7), 16));
-                        if (blue.length() < 3) {
-                            blue = "0" + blue;
-                        }
-
-                        hex = Integer.parseInt(red + green + blue);
-
-                    } catch (NumberFormatException e) {
-                        Log.e("refreshGroutAsync", "Failed to parse hex input " + hexAsString);
-                    }
-                    if(hex != 0) {
-                        boolean duplicate = false;
-                        for(GroutItem item : tempItems) {
-                            if(item.getGroutName().equals(groutName)) {
-                                duplicate = true;
-                                break;
+                        if (hex != 0) {
+                            boolean duplicate = false;
+                            for (GroutItem item : tempItems) {
+                                if (item.getGroutName().equals(groutName)) {
+                                    duplicate = true;
+                                    break;
+                                }
+                            }
+                            if (!duplicate) {
+                                tempItems.add(new GroutItem(brandName, brandCode, groutName, hex));
                             }
                         }
-                        if(!duplicate) {
-                            tempItems.add(new GroutItem(brandName, brandCode, groutName, hex));
-                        }
                     }
-                }
 
-                // Acquire mutex and replace the public copy
-                synchronized (lock) {
+                    // Acquire mutex and replace the public copy
                     groutItems = tempItems;
+                } catch (Exception ex) {
+                    Log.e("refreshGroutAsync", "Exception occurred while attempting to refresh grout: " + ex.toString());
                 }
-            } catch (Exception ex) {
-                Log.e("refreshGroutAsync", "Exception occurred while attempting to refresh grout: " + ex.toString());
             }
 
             isGroutThreadRunning = false;

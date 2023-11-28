@@ -1,5 +1,6 @@
 package edu.emich.thp;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -23,6 +24,7 @@ import android.widget.TextView;
 import java.io.IOException;
 
 import edu.emich.thp.colorpicker.ColorPicker;
+import edu.emich.thp.utils.AndroidUtils;
 import edu.emich.thp.utils.ImageUtils;
 
 /**
@@ -77,6 +79,7 @@ public class StartPage extends Fragment {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -93,6 +96,20 @@ public class StartPage extends Fragment {
         takePhotoButton.setOnClickListener(s -> {
             mTakePhotoLauncher.launch(mTakeImageIntent);
         });
+
+        TextView appVersion = view.findViewById(R.id.appVersion);
+        if (appVersion != null && getContext() != null) {
+            appVersion.setText("Version: " + AndroidUtils.getAppVersion(getContext()));
+        }
+
+        TextView phoneNumber = view.findViewById(R.id.phoneNumber);
+        if (phoneNumber != null) {
+            phoneNumber.setOnClickListener(s -> {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:2483888772"));
+                startActivity(intent);
+            });
+        }
 
         setupIntents(view);
         return view;
