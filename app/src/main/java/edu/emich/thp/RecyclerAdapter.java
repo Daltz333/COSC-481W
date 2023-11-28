@@ -1,7 +1,9 @@
 package edu.emich.thp;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import edu.emich.thp.models.GroutItem;
@@ -28,15 +31,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         private TextView color_hex;
         private TextView product_link;
         private FrameLayout hex_color_box;
+        private CardView card_holder;
 
         public MyViewHolder(final View view) {
             super(view);
             brand_name = view.findViewById(R.id.brand);
             brand_code = view.findViewById(R.id.color);
             grout_name = view.findViewById(R.id.grout);
-            color_hex = view.findViewById(R.id.hex);
-            product_link = view.findViewById(R.id.link);
             hex_color_box = view.findViewById(R.id.color_box);
+            card_holder = view.findViewById(R.id.cardView);
         }
     }
 
@@ -93,18 +96,19 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
         // Get color as hex value without the #
         this_text = red + green + blue;
-        holder.color_hex.setText(this_text);
 
         // Get color and put it as background tint
         int color = Color.parseColor("#" + this_text); // Use your desired color
         ColorStateList colorStateList = ColorStateList.valueOf(color);
         holder.hex_color_box.setBackgroundTintList(colorStateList);
 
-        // Get the product link
-        this_text = pageResults.get(position).getProductLink();
-        holder.product_link.setText(this_text);
-
-
+        // Open browser on link
+        holder.card_holder.setOnClickListener(s -> {
+            try {
+                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(pageResults.get(position).getProductLink()));
+                holder.card_holder.getContext().startActivity(i);
+            } catch (Exception ignored) {}
+        });
     }
 
     @Override
