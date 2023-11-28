@@ -94,10 +94,74 @@ public class Results extends Fragment {
     private void setResultInfo() {
         DbClient data = DbClient.getInstance();
         ArrayList<GroutItem> items = data.getGrout();
-        for(GroutItem item : items) {
-            resultsList.add(item);
-        }
 
+        // Number of results to be displayed
+        int numResults = 3;
+
+        int targetRed = 255;    // SAMPLE TARGET VALUES. THIS IS WHITE
+        int targetGreen = 255;
+        int targetBlue = 255;
+
+        // Perform nearest neighbor algorithm
+        for(int i = 0; i < items.size(); i++) {
+            // Grab the hex value of the item (as a decimal number, not actually hex)
+            int currentHex = items.get(i).getColorHex();
+
+            // Get the distance value based on RGB closeness with target RGB
+            double distance = getDistance(currentHex, targetRed, targetGreen, targetBlue);
+
+            // If there is room in the list, add to the list until the number of results has been achieved
+            if(resultsList.size() < numResults) {
+                resultsList.add(items.get(i)); // This list will contain the best matches at the end
+            }
+
+            // The list is currently full
+            else {
+                // For every item in the current closest match list...
+                for(GroutItem item : resultsList) {
+                    // If the distance of the current object is less than the distance of the current item in the best match list...
+                    if(distance < getDistance(item.getColorHex(), targetRed, targetGreen, targetBlue)) {
+                        double highestDistance = getDistance(resultsList.get(0).getColorHex(), targetRed, targetGreen, targetBlue);
+                        int dropIndex = 0;
+                        for(int j = 1; j < resultsList.size(); j++) {
+                            if(getDistance(resultsList.get(j).getColorHex(), targetRed, targetGreen, targetBlue) > highestDistance) {
+                                highestDistance = getDistance(resultsList.get(j).getColorHex(), targetRed, targetGreen, targetBlue);
+                                dropIndex = j;
+                            }
+                        }
+                        resultsList.remove(dropIndex);
+                        resultsList.add(items.get(i));
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    private double getDistance(int currentHex, int targetRed, int targetGreen, int targetBlue) {
+        int red;
+        int green;
+        int blue;
+
+        // Represents color as hex. It will be a 9 digit number
+        String stringHex = Integer.toString(currentHex);
+
+        /*
+        If the starting numbers of the hex code were 0s, they would have been dropped when they were
+        converted to an int. This loop restores those 0s for string manipulation purposes.
+        */
+        while(stringHex.length() < 9) {
+            stringHex = "0" + stringHex;
+        }
+        // Break string up into red, green, and blue values by taking substrings of 9 digit number
+        red = Integer.parseInt(stringHex.substring(0, 3));
+        green = Integer.parseInt(stringHex.substring(3, 6));
+        blue = Integer.parseInt(stringHex.substring(6, 9));
+
+
+        // Distance formula for nearest neighbor
+        double distance = Math.sqrt( Math.pow(red - targetRed, 2) + Math.pow(green - targetGreen, 2) + Math.pow(blue - targetBlue, 2) );
+        return distance;
     }
 
     @Override
