@@ -177,16 +177,6 @@ public class Results extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_results, container, false);
-        try {
-            Button settings_button = (Button) view.findViewById(R.id.results_settings_button);
-            Button menu_button = (Button) view.findViewById(R.id.results_menu_button);
-            settings_button.setOnClickListener(args -> {
-                NavHostFragment.findNavController(this).navigate(R.id.settings);
-            });
-            menu_button.setOnClickListener(args -> {
-                NavHostFragment.findNavController(this).navigate(R.id.startPage);
-            });
-        } catch (Exception ignored) {}
         return view;
     }
 }
