@@ -1,8 +1,11 @@
 package edu.emich.thp;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -24,6 +27,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         private TextView grout_name;
         private TextView color_hex;
         private TextView product_link;
+        private FrameLayout hex_color_box;
 
         public MyViewHolder(final View view) {
             super(view);
@@ -32,6 +36,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             grout_name = view.findViewById(R.id.grout);
             color_hex = view.findViewById(R.id.hex);
             product_link = view.findViewById(R.id.link);
+            hex_color_box = view.findViewById(R.id.color_box);
         }
     }
 
@@ -86,11 +91,20 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             blue = "0" + red;
         }
 
+        // Get color as hex value without the #
         this_text = red + green + blue;
         holder.color_hex.setText(this_text);
 
+        // Get color and put it as background tint
+        int color = Color.parseColor("#" + this_text); // Use your desired color
+        ColorStateList colorStateList = ColorStateList.valueOf(color);
+        holder.hex_color_box.setBackgroundTintList(colorStateList);
+
+        // Get the product link
         this_text = pageResults.get(position).getProductLink();
         holder.product_link.setText(this_text);
+
+
     }
 
     @Override

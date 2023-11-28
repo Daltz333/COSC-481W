@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
+import edu.emich.thp.GlobalSettings.GlobalSettings;
 import edu.emich.thp.utils.AndroidUtils;
 
 /***
@@ -161,6 +162,8 @@ public class ColorPicker extends View {
             int previewX = getWidth() - (getWidth()/4);
 
             try {
+                GlobalSettings settings = GlobalSettings.getInstance();
+                settings.setHexColor(m_selectedHexColor);
                 m_previewPaint.setColor(m_selectedHexColor);
                 canvas.drawRect(previewX, 0, previewX + 100, 100, m_previewPaint);
             } catch (IllegalArgumentException ignored) {}

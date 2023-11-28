@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.widget.Button;
 
 import java.util.ArrayList;
 
+import edu.emich.thp.GlobalSettings.GlobalSettings;
 import edu.emich.thp.api.DbClient;
 import edu.emich.thp.models.GroutItem;
 
@@ -98,9 +100,15 @@ public class Results extends Fragment {
         // Number of results to be displayed
         int numResults = 3;
 
-        int targetRed = 255;    // SAMPLE TARGET VALUES. THIS IS WHITE
-        int targetGreen = 255;
-        int targetBlue = 255;
+        GlobalSettings settings = GlobalSettings.getInstance();
+        String targetHex =  Integer.toHexString(settings.getHexColor());
+        if(targetHex.length() < 6) {
+            targetHex = "0" + targetHex;
+        }
+
+        int targetRed = Integer.parseInt(targetHex.substring(2, 4), 16);    // SAMPLE TARGET VALUES. THIS IS WHITE
+        int targetGreen = Integer.parseInt(targetHex.substring(4, 6), 16);
+        int targetBlue = Integer.parseInt(targetHex.substring(6, 8), 16);
 
         // Perform nearest neighbor algorithm
         for(int i = 0; i < items.size(); i++) {
